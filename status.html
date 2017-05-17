@@ -1,0 +1,129 @@
+<html>
+    <style>
+table{
+    width:100%;
+    margin-top: -5
+}
+table td{
+    white-space: wrap;
+}
+table td:last-child{
+    width:100%;
+}
+
+body {
+    /*margin-top: 100px;
+    margin-bottom: 100px;
+    margin-right: 150px;
+    margin-left: 80px;*/
+    background-color:white;
+}
+h1 {
+    color:black;
+    font-family: "Courier New";
+    font-style: italic,oblique;
+}
+.subHeading {
+    color:chocolate;
+    font-family: "Courier New";
+    font-style: italic,oblique;
+    font-weight: bolder;
+}
+.boxed {
+    /*border: 0px ;
+    background-color: lightgray*/
+}
+    </style>
+    <body>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" ><tr style="height: 0"><td item-height="0" bgcolor="#d3d3d3" style="background-color:#d3d3d3">
+        <font size="6">&nbsp;Highlights</font>
+        </td></tr></table>
+        <hr>
+
+        <table width="100%" border="0" cellpadding="0" cellspacing="0"><tr><td bgcolor="#d3d3d3" style="background-color:#d3d3d3">
+        <font size="4" class="subHeading">&nbsp;&nbsp;Tasks </font>
+        </td></tr></table>
+        <br>
+        <ul>
+            <table>
+            <tr>
+            <td>
+            {% for item in CommandTasks%}
+            <li>
+                <font><b>{{item.subject}}</b></font>
+                <ol>
+                    {%for body in item.body%}
+                    <li>{{body}}</li>
+                    {%endfor%}
+                </ol>
+            </li>
+            </td>
+            </tr>
+            {%endfor%}
+            </table>
+        </ul>
+        <hr>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0"><tr><td bgcolor="#d3d3d3" style="background-color:#d3d3d3">
+         <font size="4" class="subHeading">&nbsp;&nbsp;Bugs</font>
+        </td></tr></table>
+        <br>
+        <table border="1">
+            <tr>
+                <th> Bug Id</th>
+                <th> Description</th>
+                <th> Last Comment</th>
+            </tr>
+            {%for bug in BugLists%}
+            <tr style="word-wrap: break-word">
+                <td><a href='http:/nvbugs/{{bug.bugId}}'>{{bug.bugId}}</td>
+                <td>{{bug.description}}</td>
+                <td>{{bug.lastComment}}</td>
+            </tr>
+            {%endfor%}
+        </table>
+        <br>
+
+        <!--  Blocking Items BOX-->
+        <table width="100%" border="0" cellpadding="0" cellspacing="0"><tr><td bgcolor="#d3d3d3" style="background-color:#d3d3d3;width:1%; white-space:nowrap;">
+        <font size="4" class="subHeading">&nbsp;&nbsp;Blocking Items </font>
+        </td></tr></table>
+        <ul>
+            {% if not BlockingItems%}
+                <li><b> None </b></li>
+            {% else %}
+                {%for item in BlockingItems%}
+                <li>
+                        <b>{{item}}</b>
+                </li>
+                {%endfor%}
+
+            {%endif%}
+        </ul>
+        <!--  Upcoming OOTO BOX: End -->
+
+        <table width="100%" border="0" cellpadding="0" cellspacing="0"><tr><td bgcolor="#d3d3d3" style="background-color:#d3d3d3">
+        <!--  Upcoming OOTO BOX-->
+        <font size="4" class="subHeading">&nbsp;&nbsp;Upcoming OOTOS </font>
+        </td></tr></table>
+        <ul>
+            {% if OOTO == None%}
+                <li><b> None </b></li>
+            {% else %}
+                <li>
+                        <b>{{OOTO.date}}</b>
+                        <li>
+                                &nbsp;&nbsp;&nbsp;&nbsp;{{OOTO.reason}}
+                        </li>
+                </li>
+
+                {%endif%}
+        </ul>
+        <!--  Upcoming OOTO BOX: End -->
+
+        <p>
+            Thanks and Regards,
+            <br>
+            Pushkar Jambhlekar
+        </p>
+    </body>
+</html>
